@@ -34,7 +34,9 @@ const PendingBookings = props => {
                 bookings.forEach((booking) => {
                     // console.log(booking.id);
                     // console.log(booking.data());
-                    setAllBookingDetails((prev)=>{return [...prev, booking.data()]});
+                    var data_to_append = booking.data();
+                    data_to_append.bookingid = booking.id;
+                    setAllBookingDetails((prev)=>{return [...prev, data_to_append]});
                 });
             }
             getAllBookingDetails();

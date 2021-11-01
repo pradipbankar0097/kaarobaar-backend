@@ -80,7 +80,7 @@ const PendingBookingCard = props => {
 
   }
   const confirmBooking = async (e) => {
-    const targetBooking = doc(db, "bookings", userId, "mybookings", bookingId);
+    const targetBooking = await doc(db, "bookings", props.booking.userid, "mybookings", props.booking.bookingid);
     await updateDoc(targetBooking, { "confirmed": true });
     alert(`Booking done for ${props.booking.name}\nBooking ID : ${bookingId}`);
     uploadFirebase();

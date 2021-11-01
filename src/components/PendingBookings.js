@@ -33,12 +33,13 @@ const PendingBookings = props => {
             //setAllBookings([...allBookings, doc.id,]);
             const getAllBookingDetails = async () => {
 
-                const bookings = await getDocs(query(collection(db, `bookings/${doc.id}`)));
-
+                const bookings = await getDocs(query(collection(db, `bookings/${doc.id}/mybookings`), where("confirmed", "==", false)));
                 bookings.forEach((booking) => {
                     // console.log(booking.id);
-                    console.log(booking.data());
-                    setAllBookingDetails((prev) => { return [...prev, booking.data()] });
+                    // console.log(booking.data());
+                    var data_to_append = booking.data();
+                    data_to_append.bookingid = booking.id;
+                    setAllBookingDetails((prev) => { return [...prev, data_to_append] });
                 });
             }
             getAllBookingDetails();
